@@ -1,7 +1,5 @@
 #include <unistd.h>
 
-/*TO BE CONTINUED*/
-
 int ft_isspace(char c)
 {
 	if ((c >= 9 && c <= 13) || c == 32)
@@ -18,14 +16,20 @@ int main(int argc, char **argv)
 	{
 		while (argv[1][i] != '\0')
 			i++;
-		i--;
-		end = i;
-		while (!ft_isspace(argv[1][i]))
-			i--;
-		i++;
-		start = i;
-		while (start <= end)
-			write(1, &argv[1][start++], 1);
+		while (i >= 0)
+		{
+			while (argv[1][i] == '\0' || ft_isspace(argv[1][i]))
+				i--;
+			end = i;
+			while (argv[1][i] && !ft_isspace(argv[1][i]))
+				i--;
+			start = i + 1;
+			int	flag = start;
+			while (start <= end)
+				write(1, &argv[1][start++], 1);
+			if (flag != 0)
+				write(1, " ", 1);
+		}
 	}
 	write(1, "\n", 1);
 }
