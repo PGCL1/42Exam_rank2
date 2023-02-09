@@ -9,7 +9,7 @@ t_list	*sort_list(t_list *lst, int (*cmp)(int, int))
 	/* Saving the first node of the list in a temporary variable. */
 	tmp = lst;
 	/* Checking if the next node is NULL. */
-	while(lst->next != NULL)
+	while (lst->next != NULL)
 	{
 		/* Calling the function cmp and passing the data of the current node and the next
 		node. */
