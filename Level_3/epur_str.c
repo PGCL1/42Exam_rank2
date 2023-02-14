@@ -1,17 +1,13 @@
 #include <unistd.h>
 
-int ft_isspace(char c)
+int ft_isalpha(char c)
 {
-	if (c >= 9 && c <= 13 || c == 32)
-		return (1);
-	return (0);
+	return ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'));
 }
 
-int isalphanum(char c)
+int ft_isspace(char c)
 {
-	if (c >= 65 && c <= 90 || c >= 97 && c <= 122 || c >= 48 && c <= 57)
-		return (1);
-	return (0);
+	return ((c >= 9 && c <= 13) || c == 32);
 }
 
 int main(int argc, char **argv)
@@ -19,19 +15,20 @@ int main(int argc, char **argv)
 	int i = 0;
 	if (argc == 2)
 	{
-		while (!isalphanum(argv[1][i]))
+		while (argv[1][i] && ft_isspace(argv[1][i]))
 			i++;
 		while (argv[1][i])
 		{
-			if (ft_isspace(argv[1][i]) && (ft_isspace(argv[1][i + 1]) || argv[1][i + 1] == '\0'))
+			if (ft_isspace(argv[1][i]) && (ft_isspace(argv[1][i+1]) || argv[1][i+1] == '\0'))
 				i++;
-			else if (ft_isspace(argv[1][i]) && isalphanum(argv[1][i + 1]))
+			else if (ft_isspace(argv[1][i] && ft_isalpha(argv[1][i+1])))
 				write(1, &argv[1][i++], 1);
 			else
 				write(1, &argv[1][i++], 1);
 		}
 	}
 	write(1, "\n", 1);
+	return (0);
 }
 
 /*

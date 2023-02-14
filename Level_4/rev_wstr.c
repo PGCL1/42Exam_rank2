@@ -1,10 +1,14 @@
 #include <unistd.h>
+#include <stdio.h>
+
+int ft_isalpha(char c)
+{
+	return ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'));
+}
 
 int ft_isspace(char c)
 {
-	if ((c >= 9 && c <= 13) || c == 32)
-		return (1);
-	return (0);
+	return ((c >= 9 && c <= 13) || c == 32);
 }
 
 int main(int argc, char **argv)
@@ -12,23 +16,27 @@ int main(int argc, char **argv)
 	int i = 0;
 	int start = 0;
 	int end = 0;
+	int flag = 1;
+
 	if (argc == 2)
 	{
 		while (argv[1][i] != '\0')
 			i++;
 		while (i >= 0)
 		{
-			while (argv[1][i] == '\0' || ft_isspace(argv[1][i]))
-				i--;
 			end = i;
+			i--;
 			while (argv[1][i] && !ft_isspace(argv[1][i]))
 				i--;
-			start = i + 1;
-			int	flag = start;
-			while (start <= end)
+			start = i+1;
+			while (argv[1][start] && start < end)
+			{
+				flag = 1;
 				write(1, &argv[1][start++], 1);
-			if (flag != 0)
+			}
+			if (i > 0)
 				write(1, " ", 1);
+			flag = 0;
 		}
 	}
 	write(1, "\n", 1);
